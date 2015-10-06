@@ -1,6 +1,12 @@
+// imports
 var express = require('express');
 var request = require('request');
+var bodyParser = require('body-parser');
+
+// server
 var app = express();
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 app.get('/', function (req, res) {
     res.send('Hello World!');
@@ -21,10 +27,10 @@ app.get('/rest/getPlaces', function (req, res) {
     });
 });
 
-app.get('/headerTest', function (req, res) {
-    console.log(req.headers);
-    res.json(req.headers);
-})
+app.post('/nearByPlaces', function (req, res) {
+    var latitude = req.body.latitude;
+    res.json(latitude);
+});
 
 var server = app.listen(9000, function () {
     var host = server.address().address;
