@@ -1,8 +1,23 @@
 var express = require('express');
+var request = require('request');
 var app = express();
 
 app.get('/', function (req, res) {
     res.send('Hello World!');
+});
+
+app.get('/rest/getPlaces', function (req, res) {
+    // Define base URL and addition appended strings
+    var baseURL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?';
+    var location = 'location=' + /*latitude*/ + ',' + /*longitude*/ + '&';
+    var radius = 'radius=' + /*radius*/ + '&';
+    var type = 'types=' + /*types*/
+    json: true,
+    function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            res.json(body);
+        }
+    });
 });
 
 var server = app.listen(9000, function () {
