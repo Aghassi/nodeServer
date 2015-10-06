@@ -11,14 +11,20 @@ app.get('/rest/getPlaces', function (req, res) {
     var baseURL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?';
     var location = 'location=' + /*latitude*/ + ',' + /*longitude*/ + '&';
     var radius = 'radius=' + /*radius*/ + '&';
-    var type = 'types=' + /*types*/
-    json: true,
+    var type = 'types=';/*types*/
+
+    request({url: baseURL, json: true},
     function (error, response, body) {
         if (!error && response.statusCode == 200) {
             res.json(body);
         }
     });
 });
+
+app.get('/headerTest', function (req, res) {
+    console.log(req.headers);
+    res.json(req.headers);
+})
 
 var server = app.listen(9000, function () {
     var host = server.address().address;
